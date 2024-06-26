@@ -259,8 +259,16 @@ class _InternalWeekViewPageState<T extends Object?>
   Widget build(BuildContext context) {
     final filteredDates = _filteredDate();
 
-    final width = widget.width * widget.widthScaleFactor;
+    final width = (widget.width -
+            widget.timeLineWidth -
+            widget.hourIndicatorSettings.offset) *
+        widget.widthScaleFactor;
+
     final weekTitleWidth = width / filteredDates.length;
+
+    final horizontalScrollPhysics = widget.widthScaleFactor > 1
+        ? ClampingScrollPhysics()
+        : NeverScrollableScrollPhysics();
 
     return Container(
       height: widget.height + widget.weekTitleHeight,
@@ -286,7 +294,7 @@ class _InternalWeekViewPageState<T extends Object?>
                   child: SingleChildScrollView(
                     controller: weekdayScrollController,
                     scrollDirection: Axis.horizontal,
-                    physics: ClampingScrollPhysics(),
+                    physics: horizontalScrollPhysics,
                     child: Row(
                       children: [
                         ...List.generate(
@@ -345,7 +353,7 @@ class _InternalWeekViewPageState<T extends Object?>
                     child: SingleChildScrollView(
                       controller: fullDayEventScrollController,
                       scrollDirection: Axis.horizontal,
-                      physics: ClampingScrollPhysics(),
+                      physics: horizontalScrollPhysics,
                       child: Row(
                         children: [
                           ...List.generate(
@@ -411,7 +419,7 @@ class _InternalWeekViewPageState<T extends Object?>
                         child: SingleChildScrollView(
                           controller: eventScrollController,
                           scrollDirection: Axis.horizontal,
-                          physics: ClampingScrollPhysics(),
+                          physics: horizontalScrollPhysics,
                           child: Stack(
                             children: [
                               CustomPaint(
