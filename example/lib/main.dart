@@ -43,6 +43,11 @@ List<CalendarEventData> _events = [
     endTime: DateTime(_now.year, _now.month, _now.day, 22),
   ),
   CalendarEventData(
+    date: _now,
+    title: "Project meeting",
+    description: "Today is project meeting.",
+  ),
+  CalendarEventData(
     date: _now.add(Duration(days: 1)),
     startTime: DateTime(_now.year, _now.month, _now.day, 18),
     endTime: DateTime(_now.year, _now.month, _now.day, 19),
