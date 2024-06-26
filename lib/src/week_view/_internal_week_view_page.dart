@@ -259,12 +259,12 @@ class _InternalWeekViewPageState<T extends Object?>
   Widget build(BuildContext context) {
     final filteredDates = _filteredDate();
 
-    final width = (widget.width -
+    final eventsViewWidth = (widget.width -
             widget.timeLineWidth -
             widget.hourIndicatorSettings.offset) *
         widget.widthScaleFactor;
 
-    final weekTitleWidth = width / filteredDates.length;
+    final weekTitleWidth = eventsViewWidth / filteredDates.length;
 
     final horizontalScrollPhysics = widget.widthScaleFactor > 1
         ? ClampingScrollPhysics()
@@ -316,7 +316,7 @@ class _InternalWeekViewPageState<T extends Object?>
           ),
           Divider(thickness: 1, height: 1),
           SizedBox(
-            width: width,
+            width: widget.width,
             child: Container(
               decoration: BoxDecoration(
                 border: Border(
@@ -423,7 +423,7 @@ class _InternalWeekViewPageState<T extends Object?>
                           child: Stack(
                             children: [
                               CustomPaint(
-                                size: Size(width, widget.height),
+                                size: Size(eventsViewWidth, widget.height),
                                 painter: HourLinePainter(
                                   lineColor: widget.hourIndicatorSettings.color,
                                   lineHeight:
@@ -440,7 +440,7 @@ class _InternalWeekViewPageState<T extends Object?>
                               ),
                               if (widget.showHalfHours)
                                 CustomPaint(
-                                  size: Size(width, widget.height),
+                                  size: Size(eventsViewWidth, widget.height),
                                   painter: HalfHourLinePainter(
                                     lineColor:
                                         widget.halfHourIndicatorSettings.color,
@@ -463,7 +463,7 @@ class _InternalWeekViewPageState<T extends Object?>
                                 ),
                               if (widget.showQuarterHours)
                                 CustomPaint(
-                                  size: Size(width, widget.height),
+                                  size: Size(eventsViewWidth, widget.height),
                                   painter: QuarterHourLinePainter(
                                     lineColor: widget
                                         .quarterHourIndicatorSettings.color,
