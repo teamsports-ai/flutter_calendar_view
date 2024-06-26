@@ -240,6 +240,9 @@ class WeekView<T extends Object?> extends StatefulWidget {
   /// Flag to keep scrollOffset of pages on page change
   final bool keepScrollOffset;
 
+  // Define the factor to determine the width of week view in mobile view (width = screenWidth * mobileViewWidthFactor)
+  final double widthScaleFactor;
+
   /// Main widget for week view.
   const WeekView({
     Key? key,
@@ -298,6 +301,7 @@ class WeekView<T extends Object?> extends StatefulWidget {
     this.fullDayHeaderTitle = '',
     this.fullDayHeaderTextConfig,
     this.keepScrollOffset = false,
+    this.widthScaleFactor = 1.0,
   })  : assert(!(onHeaderTitleTap != null && weekPageHeaderBuilder != null),
             "can't use [onHeaderTitleTap] & [weekPageHeaderBuilder] simultaneously"),
         assert((timeLineOffset) >= 0,
@@ -559,6 +563,7 @@ class WeekViewState<T extends Object?> extends State<WeekView<T>> {
                             lastScrollOffset: _lastScrollOffset,
                             scrollListener: _scrollPageListener,
                             keepScrollOffset: widget.keepScrollOffset,
+                            widthScaleFactor: widget.widthScaleFactor,
                           ),
                         );
                       },
